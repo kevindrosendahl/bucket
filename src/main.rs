@@ -3,7 +3,7 @@ use std::fs;
 extern crate clap;
 extern crate nix;
 
-use clap::App;
+use clap::{Arg, App, SubCommand};
 
 fn print_root() -> std::io::Result<()> {
     for entry in fs::read_dir("/")? {
@@ -19,7 +19,7 @@ fn main() {
                           .arg(Arg::with_name("ROOTFS_PATH")
                                .help("Path to the rootfs")
                                .required(true)
-                               .index(1)
+                               .index(1))
                           .get_matches();
     let rootfs_path = matches.value_of("ROOTFS_PATH").unwrap();
     println!("rootfs path: {:?}", rootfs_path);
